@@ -32,8 +32,8 @@ $app = KisFactory::kis([
 //var_dump($app->gateway->getGatewayInfo());
 
 // 获取供应商数据
-//var_dump($app->baseInfo->getBaseInfoList(Constant::BASE_ID_PROJECT, Constant::CLASS_SUPPLIER));
+var_dump($app->baseInfo->getBaseInfoList(Constant::BASE_ID_PROJECT, Constant::CLASS_SUPPLIER));
 
 
 // 获取应付账单列表
-var_dump($app->pay->getOtherApBillList(1, 20));
+//var_dump($app->pay->getOtherApBillList(1, 20));
