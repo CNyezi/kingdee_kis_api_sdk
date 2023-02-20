@@ -7,6 +7,8 @@ use Holt\KindeeKis\Kernel\Events\HttpResponseCreated;
 
 class Client extends BaseClient
 {
+
+
     public function request(string $url, string $method = 'GET', array $options = [], $returnRaw = false)
     {
         if (empty($this->middlewares)) {

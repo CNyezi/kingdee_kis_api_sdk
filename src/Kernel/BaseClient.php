@@ -46,6 +46,7 @@ class BaseClient
     protected $accessToken = null;
 
 
+    protected $needGateway = false;
     /**
      * @var AppValidateInterface
      */
@@ -237,7 +238,7 @@ class BaseClient
         if ($withAccessToken) {
             $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
         }
-        if (isset($this->app['gateway'])){
+        if (isset($this->app['gateway']) && $this->needGateway){
             $this->pushMiddleware($this->gatewayMiddleware(), 'gateway');
         }
 

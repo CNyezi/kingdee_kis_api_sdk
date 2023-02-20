@@ -7,6 +7,9 @@ use Holt\KindeeKis\Kernel\Events\HttpResponseCreated;
 
 class Client extends BaseClient
 {
+
+    protected $needGateway = true;
+
     /**
      * 获取其他应付账单列表
      * @param $page
@@ -34,15 +37,17 @@ class Client extends BaseClient
      * doc link
      * https://open.jdy.com/#/files/api/detail?index=2&categrayId=dded94c553614747b2c9b8b49c396aa6&id=42a99333755611ed86f705c49066d110
      */
-    public function addOtherAp($head, $entryList, $entry2List)
+    public function createOtherAp($head, $entryList, $entry2List)
     {
-        return $this->httpPostJson('/koas/APP007020/api/OtherApBill/Create', [
+        $params = [
             "Object" => [
                 "Head" => $head,
                 "Entry" => $entryList,
                 "Entry2" => $entry2List
             ]
-        ]);
+        ];
+        var_dump(json_encode($params));
+        return $this->httpPostJson('/koas/APP007020/api/OtherApBill/Create', $params);
     }
     // 参考请求体
     //[
