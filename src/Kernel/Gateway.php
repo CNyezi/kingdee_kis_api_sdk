@@ -65,6 +65,11 @@ abstract class Gateway implements GatewayInterface
         return null;
     }
 
+    public function deleteCurrentCache()
+    {
+        return $this->getCache()->delete($this->getCacheKey());
+    }
+
     public function issetGatewayInfo()
     {
         return $this->getCache()->has($this->getCacheKey());

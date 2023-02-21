@@ -161,6 +161,11 @@ abstract class AccessToken implements AccessTokenInterface
         return $this;
     }
 
+    public function deleteCurrentCache()
+    {
+        return $this->getCache()->delete($this->getCacheKey());
+    }
+
     /**
      * @return AccessTokenInterface
      *

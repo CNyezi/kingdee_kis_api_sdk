@@ -8,6 +8,8 @@ require '../vendor/autoload.php';
 
 $app = KisFactory::kis(require_once '../test_config.php');
 
+$app->gateway->deleteCurrentCache();
+$app->access_token->deleteCurrentCache();
 
 var_dump($app->checkKisAuthStatus());
 
@@ -46,7 +48,7 @@ var_dump($app->checkKisAuthStatus());
 //var_dump(json_encode($app->baseInfo->getEmployeeList()));
 
 // 获取应付账单列表
-var_dump($app->pay->getOtherApBillList(1, 20));
+//var_dump($app->pay->getOtherApBillList(1, 20));
 
 // 创建应付账单
 //var_dump($app->pay->createOtherAp([
