@@ -3,8 +3,11 @@
 namespace Holt\KindeeKis\Apis\Kis;
 
 
+use Exception;
+use Holt\KindeeKis\Apis\Constant;
 use Holt\KindeeKis\Apis\Kis\BaseInfo\Client;
 use Holt\KindeeKis\Apis\Kis\BaseInfo\ServiceProvider;
+use Holt\KindeeKis\Kernel\Exceptions\NeedLoginException;
 use Holt\KindeeKis\Kernel\ServiceContainer;
 use Pimple\ServiceProviderInterface;
 
@@ -25,6 +28,22 @@ class Application extends ServiceContainer
         Pay\ServiceProvider::class
     ];
 
+    public function checkKisAuthStatus()
+    {
+        try {
+            $token = $this->access_token->getToken();
+            if ($token && $token['access_token_expire_in'] < time() + 2 * 86400) {
+                $this->access_token->refresh();
+            }
+            $gateway = $this->gateway->getGatewayInfo();
+            if (!$gateway) {
+                return Constant::LOGIN_STATUS_NEED_CHOOSE_ACCOUNT;
+            }
+            return Constant::LOGIN_STATUS_OK;
+        } catch (NeedLoginException $e) {
+            return Constant::LOGIN_STATUS_NEED_LOGIN;
+        }
+    }
 
 
 }

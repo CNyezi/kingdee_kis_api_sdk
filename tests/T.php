@@ -9,11 +9,14 @@ require '../vendor/autoload.php';
 $app = KisFactory::kis(require_once '../test_config.php');
 
 
+var_dump($app->checkKisAuthStatus());
+
 // 获取验证码
 //var_dump($app->login->getSmsCode('13316856641'));
-
+//
 // 验证码登录
-//var_dump($app->login->loginWithCode('13316856641','776524'));
+//var_dump($app->login->loginWithCode('13316856641','874872'));
+
 
 // 获取有权限的账套列表
 //var_dump($app->account->getAccountsList());
@@ -35,7 +38,7 @@ $app = KisFactory::kis(require_once '../test_config.php');
 //var_dump($app->baseInfo->getAccountingItemList());
 
 //批量查询科目基础资料详情
-var_dump(json_encode($app->baseInfo->getAccountList()));
+//var_dump(json_encode($app->baseInfo->getAccountList()));
 
 // 部门列表
 //var_dump($app->baseInfo->getDepartmentList());
@@ -43,7 +46,7 @@ var_dump(json_encode($app->baseInfo->getAccountList()));
 //var_dump(json_encode($app->baseInfo->getEmployeeList()));
 
 // 获取应付账单列表
-//var_dump($app->pay->getOtherApBillList(1, 20));
+var_dump($app->pay->getOtherApBillList(1, 20));
 
 // 创建应付账单
 //var_dump($app->pay->createOtherAp([

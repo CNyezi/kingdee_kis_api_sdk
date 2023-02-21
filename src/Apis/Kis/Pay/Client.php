@@ -46,7 +46,6 @@ class Client extends BaseClient
                 "Entry2" => $entry2List
             ]
         ];
-        var_dump(json_encode($params));
         return $this->httpPostJson('/koas/APP007020/api/OtherApBill/Create', $params);
     }
     // 参考请求体

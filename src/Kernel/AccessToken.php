@@ -114,6 +114,7 @@ abstract class AccessToken implements AccessTokenInterface
      * @throws InvalidConfigException
      * @throws InvalidArgumentException
      * @throws RuntimeException
+     * @throws NeedLoginException
      */
     public function getToken(bool $refresh = false): array
     {
@@ -244,7 +245,7 @@ abstract class AccessToken implements AccessTokenInterface
      */
     protected function getCacheKey(): string
     {
-        return $this->cachePrefix . $this->app['config']['company_id'] . '.' . md5(json_encode($this->getCredentials()));
+        return $this->cachePrefix . $this->app['config']['company_id'] . '.' . md5(json_encode($this->app->config));
     }
 
     /**

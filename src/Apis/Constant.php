@@ -34,4 +34,9 @@ class Constant
     // 物流公司
     public const CLASS_LOGISTICS_COMPANY = 9997;
 
+
+    public const LOGIN_STATUS_NEED_LOGIN = 1;
+    public const LOGIN_STATUS_NEED_CHOOSE_ACCOUNT = 2;
+    public const LOGIN_STATUS_OK = 3;
+
 }
