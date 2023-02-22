@@ -123,4 +123,11 @@ class Client extends BaseClient
         ]);
     }
 
+    public function getEmployeeDetail($itemId)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/Employee/Get', [
+            "ItemId" => $itemId
+        ]);
+    }
+
 }
