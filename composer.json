@@ -12,7 +12,6 @@
         "symfony/cache": "^5.4",
         "psr/simple-cache": "^1.0",
         "symfony/event-dispatcher": "^5.4",
-      "ext-http": "*"
     },
     "license": "MIT",
     "autoload": {
