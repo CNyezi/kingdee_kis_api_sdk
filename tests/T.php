@@ -1,6 +1,5 @@
 <?php
 
-use Holt\KindeeKis\Apis\Constant;
 use Holt\KindeeKis\KisFactory;
 
 
@@ -8,16 +7,15 @@ require '../vendor/autoload.php';
 
 $app = KisFactory::kis(require_once '../test_config.php');
 
-$app->gateway->deleteCurrentCache();
-$app->access_token->deleteCurrentCache();
+//$app->gateway->deleteCurrentCache();
+//$app->access_token->deleteCurrentCache();
 
-var_dump($app->checkKisAuthStatus());
 
 // 获取验证码
-//var_dump($app->login->getSmsCode('13316856641'));
-//
+//var_dump($app->login->getSmsCode('18923596893'));
+
 // 验证码登录
-//var_dump($app->login->loginWithCode('13316856641','874872'));
+//var_dump($app->login->loginWithCode('18923596893','417555'));
 
 
 // 获取有权限的账套列表
@@ -35,6 +33,25 @@ var_dump($app->checkKisAuthStatus());
 
 // 获取供应商数据
 //var_dump($app->baseInfo->getSupplierList());
+
+//获取物料分类
+//var_dump($app->baseInfo->getMaterialCategoryList());
+
+//获取所有物料
+//var_dump($app->baseInfo->getAllMaterialList());
+
+//获取单个物料信息资料
+//var_dump($app->baseInfo->getMaterialDetail(258));
+
+//获取某个计量单位分组下的物料单位列表
+//var_dump($app->baseInfo->getMaterialUnitList(1,20,256));
+
+//获取物料单位详情
+//var_dump($app->baseInfo->getMaterialUnitDetail(257));
+
+
+//批量获取计量单位组
+//var_dump($app->baseInfo->getMaterialUnitGroupList());
 
 // 批量查询核算项目信息详情
 //var_dump($app->baseInfo->getAccountingItemList());

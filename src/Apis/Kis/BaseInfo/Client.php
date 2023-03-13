@@ -2,8 +2,12 @@
 
 namespace Holt\KindeeKis\Apis\Kis\BaseInfo;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Holt\KindeeKis\Kernel\BaseClient;
 use Holt\KindeeKis\Kernel\Events\HttpResponseCreated;
+use Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException;
+use Holt\KindeeKis\Kernel\Support\Collection;
+use Psr\Http\Message\ResponseInterface;
 
 class Client extends BaseClient
 {
@@ -48,14 +52,121 @@ class Client extends BaseClient
 
 
     /**
+     * 获取物料分类列表
+     * @param int $page
+     * @param int $pageSize
+     * @return array|string|Collection|ResponseInterface
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getMaterialCategoryList(int $page = 1, int $pageSize = 20)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/MaterialCategory/List',[
+            'CurrentPage'=>$page,
+            'ItemsOfPage'=>$pageSize
+        ]);
+    }
+
+    /**
+     * 获取所有物料
+     * @param $page
+     * @param $pageSize
+     * @param $parentId
+     * @param $detail
+     * @param $searchKey
+     * @param $ids
+     * @param $startDate
+     * @param $endDate
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getAllMaterialList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '')
+    {
+        return $this->httpPostJson('/koas/APP006992/api/Material/List',[
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'ParentId' => $parentId,
+            'Detail' => $detail,
+            'SearchKey' => $searchKey,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate
+        ]);
+    }
+
+    /**
+     * 获取物料资料详情
+     * @param $id
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getMaterialDetail($id = 0)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/Material/Get', [
+            'ItemId' => $id
+        ]);
+    }
+
+    /**
+     * 获取某个计量单位分组下的物料单位列表
+     * @param $page
+     * @param $pageSize
+     * @param $groupId
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getMaterialUnitList($page = 1, $pageSize = 20, $groupId = 0)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/List', [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'FUnitGroupID' => $groupId
+        ]);
+    }
+
+    /**
+     * 获取计量单位分组列表
+     * @param $page
+     * @param $pageSize
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getMaterialUnitGroupList($page = 1, $pageSize = 20)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/UnitGroupList',[
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page
+        ]);
+
+    }
+
+    /**
+     * 获取物料单位详情
+     * @param $id
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getMaterialUnitDetail($id = 0)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/GetDetail', [
+            'FItemID' => $id
+        ]);
+    }
+    
+    /**
      * 批量查询核算项目信息详情
      *
      * https://open.jdy.com/#/files/api/detail?index=2&categrayId=dded94c553614747b2c9b8b49c396aa6&id=a75638a6753711ed86f7f51a4d6b3fcf
      * @param $pageSize
      * @param $page
-     * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
+     * @return array|Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
      */
     public function getAccountingItemList($page = 1, $pageSize = 20)
     {
@@ -75,9 +186,9 @@ class Client extends BaseClient
      * @param $ids
      * @param $startDate
      * @param $endDate
-     * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
+     * @return array|Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
      */
     public function getAccountList($page = 1, $pageSize = 20, $ids = [], $startDate = '', $endDate = '')
     {
