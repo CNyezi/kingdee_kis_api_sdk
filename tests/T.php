@@ -15,7 +15,7 @@ $app = KisFactory::kis(require_once '../test_config.php');
 //var_dump($app->login->getSmsCode('18923596893'));
 
 // 验证码登录
-//var_dump($app->login->loginWithCode('18923596893','417555'));
+//var_dump($app->login->loginWithCode('18923596893','273424'));
 
 
 // 获取有权限的账套列表
@@ -48,6 +48,15 @@ $app = KisFactory::kis(require_once '../test_config.php');
 
 //获取物料单位详情
 //var_dump($app->baseInfo->getMaterialUnitDetail(257));
+
+//获取供应商资料详情
+//var_dump($app->baseInfo->getSupplierDetail(252));
+
+//获取结算方式列表
+//var_dump($app->baseInfo->getSettleMethodList());
+
+//查询库存
+var_dump($app->baseInfo->getStockCount());
 
 
 //批量获取计量单位组

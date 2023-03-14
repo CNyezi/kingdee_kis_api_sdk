@@ -35,6 +35,20 @@ class Client extends BaseClient
         return $this->httpPostJson('/koas/SVC200000/goodsmanage/ItemInfo/GetBaseInfo', $params);
     }
 
+    /**
+     * 获取供应商资料列表
+     * @param $page
+     * @param $pageSize
+     * @param $parentId
+     * @param $detail
+     * @param $searchKey
+     * @param $ids
+     * @param $startDate
+     * @param $endDate
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
     public function getSupplierList($page = 1, $pageSize = 20, $parentId = 0,
                                     $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '')
     {
@@ -50,6 +64,36 @@ class Client extends BaseClient
         ]);
     }
 
+    /**
+     * 获取供应商资料详情
+     * @param $itemId
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getSupplierDetail($itemId = 0)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/Vendor/Get', [
+            'ItemId' => $itemId,
+        ]);
+    }
+
+    /**
+     * 获取结算方式列表
+     * @param $page
+     * @param $pageSize
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getSettleMethodList($page = 1, $pageSize = 20)
+    {
+        return $this->httpPostJson('/koas/APP006992/api/Settle/List', [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize
+        ]);
+    }
+
 
     /**
      * 获取物料分类列表
@@ -61,9 +105,9 @@ class Client extends BaseClient
      */
     public function getMaterialCategoryList(int $page = 1, int $pageSize = 20)
     {
-        return $this->httpPostJson('/koas/APP006992/api/MaterialCategory/List',[
-            'CurrentPage'=>$page,
-            'ItemsOfPage'=>$pageSize
+        return $this->httpPostJson('/koas/APP006992/api/MaterialCategory/List', [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize
         ]);
     }
 
@@ -83,7 +127,7 @@ class Client extends BaseClient
      */
     public function getAllMaterialList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '')
     {
-        return $this->httpPostJson('/koas/APP006992/api/Material/List',[
+        return $this->httpPostJson('/koas/APP006992/api/Material/List', [
             'ItemsOfPage' => $pageSize,
             'CurrentPage' => $page,
             'ParentId' => $parentId,
@@ -137,7 +181,7 @@ class Client extends BaseClient
      */
     public function getMaterialUnitGroupList($page = 1, $pageSize = 20)
     {
-        return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/UnitGroupList',[
+        return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/UnitGroupList', [
             'ItemsOfPage' => $pageSize,
             'CurrentPage' => $page
         ]);
@@ -157,7 +201,7 @@ class Client extends BaseClient
             'FItemID' => $id
         ]);
     }
-    
+
     /**
      * 批量查询核算项目信息详情
      *
@@ -173,6 +217,32 @@ class Client extends BaseClient
         return $this->httpPostJson('/koas/APP006992/api/AccountingItem/List', [
             'ItemsOfPage' => $pageSize,
             'CurrentPage' => $page
+        ]);
+    }
+
+    /**
+     * 查询库存
+     * @param $page
+     * @param $pageSize
+     * @param $data
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getStockCount($page = 1, $pageSize = 20, $data = [])
+    {
+        return $this->httpPostJson('/koas/APP002112/uereport/UEStockController/SearchItemInfors', [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+            'Data' => [
+                "GName" => "",
+                "GCode" => "",
+                "GHelpCode" => "",
+                "GBatchNo" => "",
+                "GStockCode" => "",
+                "SearchTop" => "",
+                "GModel" => ""
+            ],
         ]);
     }
 
