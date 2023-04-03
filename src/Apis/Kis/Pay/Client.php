@@ -32,9 +32,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params[] = [
-                'AccountDb' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP007020/api/OtherApBill/List', $params);

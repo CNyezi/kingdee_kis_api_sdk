@@ -22,7 +22,7 @@ class ServiceProvider implements ServiceProviderInterface
         !isset($app['gateway']) && $app['gateway'] = function ($app) {
             return new Gateway($app);
         };
-        !isset($app['baseInfo']) && $app['baseInfo'] = function ($app) {
+        !isset($app['sale']) && $app['sale'] = function ($app) {
             return new Client($app);
         };
     }

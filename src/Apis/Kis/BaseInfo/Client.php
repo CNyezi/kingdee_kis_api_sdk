@@ -33,9 +33,7 @@ class Client extends BaseClient
 
         }
         if ($accountDb != '') {
-            $params = [
-                'AccountDb' => $accountDb
-            ];
+            $params['AccountDb']=$accountDb;
         }
         return $this->httpPostJson('/koas/SVC200000/goodsmanage/ItemInfo/GetBaseInfo', $params);
     }
@@ -82,7 +80,7 @@ class Client extends BaseClient
      * @throws InvalidConfigException
      */
     public function getSupplierList($page = 1, $pageSize = 20, $parentId = 0,
-                                    $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDB = '02.02')
+                                    $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDb = '02.02')
     {
         $params = [
             'ItemsOfPage' => $pageSize,
@@ -95,10 +93,8 @@ class Client extends BaseClient
             'EndDate' => $endDate
         ];
 
-        if ($accountDB != '') {
-            $params = [
-                'AccountDB' => $accountDB
-            ];
+        if ($accountDb != '') {
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Vendor/List', $params);
@@ -112,15 +108,13 @@ class Client extends BaseClient
      * @throws GuzzleException
      * @throws InvalidConfigException
      */
-    public function getSupplierDetail($itemId = 0, $accountDB = '')
+    public function getSupplierDetail($itemId = 0, $accountDb = '')
     {
         $params = [
             'ItemId' => $itemId,
         ];
-        if ($accountDB != '') {
-            $params = [
-                'AccountDB' => $accountDB
-            ];
+        if ($accountDb != '') {
+            $params['AccountDb']=$accountDb;
         }
         return $this->httpPostJson('/koas/APP006992/api/Vendor/Get', $params);
     }
@@ -140,9 +134,7 @@ class Client extends BaseClient
             'ItemsOfPage' => $pageSize
         ];
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Settle/List', $params);
@@ -191,9 +183,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/MaterialCategory/List', $params);
@@ -253,9 +243,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
         return $this->httpPostJson('/koas/APP006992/api/Material/List', $params);
     }
@@ -274,9 +262,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Material/Get', $params);
@@ -300,9 +286,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/List', $params);
@@ -324,9 +308,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
 
@@ -348,9 +330,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/GetDetail', $params);
@@ -374,9 +354,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/AccountingItem/List', $params);
@@ -408,9 +386,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
         return $this->httpPostJson('/koas/APP002112/uereport/UEStockController/SearchItemInfors', $params);
     }
@@ -435,9 +411,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
 
@@ -468,9 +442,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP002112/uereport/UEStockController/GetItemStockInfors', $params);
@@ -501,9 +473,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Account/List', $params);
@@ -524,9 +494,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Department/List', $params);
@@ -547,9 +515,7 @@ class Client extends BaseClient
             "FItemClassID" => 2
         ];
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
 
@@ -564,9 +530,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params = [
-                'AccountDB' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Employee/Get', $params);

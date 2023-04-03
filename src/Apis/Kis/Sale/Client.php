@@ -26,10 +26,10 @@ class Client extends BaseClient
             'ItemsOfPage' => $pageSize,
         ];
         if ($accountDb != '') {
-            $params[]= [
-                'AccountDb' => $accountDb,
-            ];
+            $params['AccountDb']=$accountDb;
         }
+
+        var_dump($params);
         return $this->httpPostJson('/koas/app007099/api/salesorder/list', $params);
     }
 

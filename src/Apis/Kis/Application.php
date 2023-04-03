@@ -16,6 +16,7 @@ use Pimple\ServiceProviderInterface;
  *  * @property Account\Client $account
  * @property Client $baseInfo
  * @property \Holt\KindeeKis\Apis\Kis\Pay\Client $pay
+ * @property \Holt\KindeeKis\Apis\Kis\Sale\Client $sale
  */
 class Application extends ServiceContainer
 {
