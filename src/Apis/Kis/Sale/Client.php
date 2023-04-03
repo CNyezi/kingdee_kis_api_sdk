@@ -29,29 +29,27 @@ class Client extends BaseClient
             $params['AccountDb']=$accountDb;
         }
 
-        var_dump($params);
         return $this->httpPostJson('/koas/app007099/api/salesorder/list', $params);
     }
 
 
     /**
      * 获取销售单详情
+     * id 为销售单列表FInterID
      * @param $id
-     * @param $accountDb
+     * @param string $accountDb
      * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
      */
-    public function saleOrderDetail($id, $accountDb = '')
+    public function saleOrderDetail($id, string $accountDb = '')
     {
         $params = [
             'Id' => $id
         ];
 
         if ($accountDb != '') {
-            $params[] = [
-                'AccountDb' => $accountDb,
-            ];
+            $params['AccountDb'] = $accountDb;
         }
 
         return $this->httpPostJson('/koas/app007099/api/salesorder/getdetail', $params);
@@ -59,6 +57,7 @@ class Client extends BaseClient
 
     /**
      * 获取发货单列表
+     * FOrderInterID 为销售单id
      * @param $page
      * @param $pageSize
      * @param $accountDb
@@ -73,9 +72,7 @@ class Client extends BaseClient
             'ItemsOfPage' => $pageSize,
         ];
         if ($accountDb != '') {
-            $params[] = [
-                'AccountDb' => $accountDb,
-            ];
+            $params['AccountDb'] = $accountDb;
         }
 
         return $this->httpPostJson('/koas/app007099/api/deliverynotice/list', $params);
@@ -96,9 +93,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params[] = [
-                'AccountDb' => $accountDb,
-            ];
+            $params['AccountDb'] = $accountDb;
         }
 
         return $this->httpPostJson('/koas/app007099/api/deliverynotice/getdetail', $params);
