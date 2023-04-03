@@ -39,10 +39,10 @@ abstract class Gateway implements GatewayInterface
             'gateway' => $gatewayData['gateway'],
             'auth_data' => $gatewayData['auth_data'],
             'gw_router_addr' => $gatewayData['gw_router_addr'],
-            'refresh_auth_data_token' => $gatewayData['extend_data']['refresh_auth_data_token'],
-            'refresh_auth_data_token_expire_in' => $gatewayData['extend_data']['refresh_auth_data_token_expire_in']
+            'refresh_auth_data_token' => '',
+            'refresh_auth_data_token_expire_in' => ''
         ];
-        $this->getCache()->set($cacheKey, $cacheData,   $cacheData['refresh_auth_data_token_expire_in'] - time());
+        $this->getCache()->set($cacheKey, $cacheData,   9999999);
 
         if (!$this->getCache()->has($cacheKey)) {
             throw new RuntimeException('Failed to cache gateway info.');
@@ -58,6 +58,7 @@ abstract class Gateway implements GatewayInterface
     public function getGatewayInfo()
     {
         $cache = $this->getCache();
+        var_dump($cache);
         $cacheKey = $this->getCacheKey();
         if ($cache->has($cacheKey) && $result = $cache->get($cacheKey)) {
             return $result;

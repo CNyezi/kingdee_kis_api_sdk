@@ -29,7 +29,7 @@ class Client extends BaseClient
             'vcode' => $code
         ]);
         if ($response['errcode'] == 0) {
-            $this->app->access_token->setToken($response['data'], 10800);
+            $this->app->access_token->setToken($response['data'], 999999);
         }
         return $response;
 
