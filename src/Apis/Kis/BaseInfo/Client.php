@@ -13,8 +13,9 @@ class Client extends BaseClient
 
     protected $needGateway = true;
 
-    public function getBaseInfoList($baseId, $fItemClassID, $fParentID = null, $pageSize = 20, $page = 1)
+    public function getBaseInfoList($baseId, $fItemClassID, $fParentID = null, $pageSize = 20, $page = 1, $accountDb = '')
     {
+
         $params = [
             'Data' => [
                 'BaseID' => $baseId,
@@ -30,6 +31,11 @@ class Client extends BaseClient
         if (isset($fParentID)) {
             $params['Data']['Para']                   ['FParentID'] = $fParentID;
 
+        }
+        if ($accountDb != '') {
+            $params = [
+                'AccountDb' => $accountDb
+            ];
         }
         return $this->httpPostJson('/koas/SVC200000/goodsmanage/ItemInfo/GetBaseInfo', $params);
     }
@@ -76,32 +82,25 @@ class Client extends BaseClient
      * @throws InvalidConfigException
      */
     public function getSupplierList($page = 1, $pageSize = 20, $parentId = 0,
-                                    $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDB = '')
+                                    $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDB = '02.02')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'ParentId' => $parentId,
+            'Detail' => $detail,
+            'SearchKey' => $searchKey,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate
+        ];
+
         if ($accountDB != '') {
             $params = [
-                'AccountDB' => $accountDB,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
+                'AccountDB' => $accountDB
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/Vendor/List', $params);
     }
 
@@ -115,14 +114,12 @@ class Client extends BaseClient
      */
     public function getSupplierDetail($itemId = 0, $accountDB = '')
     {
+        $params = [
+            'ItemId' => $itemId,
+        ];
         if ($accountDB != '') {
             $params = [
-                'AccountDB' => $accountDB,
-                'ItemId' => $itemId,
-            ];
-        } else {
-            $params = [
-                'ItemId' => $itemId,
+                'AccountDB' => $accountDB
             ];
         }
         return $this->httpPostJson('/koas/APP006992/api/Vendor/Get', $params);
@@ -138,16 +135,13 @@ class Client extends BaseClient
      */
     public function getSettleMethodList($page = 1, $pageSize = 20, $accountDb = '')
     {
+        $params = [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize
+        ];
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize
-            ];
-        } else {
-            $params = [
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize
             ];
         }
 
@@ -191,18 +185,17 @@ class Client extends BaseClient
      */
     public function getMaterialCategoryList(int $page = 1, int $pageSize = 20, $accountDb = '')
     {
+        $params = [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize
-            ];
-        } else {
-            $params = [
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/MaterialCategory/List', $params);
     }
 
@@ -248,28 +241,20 @@ class Client extends BaseClient
      */
     public function getAllMaterialList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'ParentId' => $parentId,
+            'Detail' => $detail,
+            'SearchKey' => $searchKey,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
             ];
         }
         return $this->httpPostJson('/koas/APP006992/api/Material/List', $params);
@@ -284,16 +269,16 @@ class Client extends BaseClient
      */
     public function getMaterialDetail($id = 0, $accountDb = '')
     {
+        $params = [
+            'ItemId' => $id
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemId' => $id
-            ];
-        } else {
-            $params = [
-                'ItemId' => $id
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/Material/Get', $params);
     }
 
@@ -308,20 +293,18 @@ class Client extends BaseClient
      */
     public function getMaterialUnitList($page = 1, $pageSize = 20, $groupId = 0, $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'FUnitGroupID' => $groupId
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'FUnitGroupID' => $groupId
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'FUnitGroupID' => $groupId
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/List', $params);
     }
 
@@ -335,18 +318,18 @@ class Client extends BaseClient
      */
     public function getMaterialUnitGroupList($page = 1, $pageSize = 20, $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page
             ];
         }
+
+
         return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/UnitGroupList', $params);
 
     }
@@ -360,16 +343,16 @@ class Client extends BaseClient
      */
     public function getMaterialUnitDetail($id = 0, $accountDb = '')
     {
+        $params = [
+            'FItemID' => $id
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'FItemID' => $id
-            ];
-        } else {
-            $params = [
-                'FItemID' => $id
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/GetDetail', $params);
     }
 
@@ -385,18 +368,17 @@ class Client extends BaseClient
      */
     public function getAccountingItemList($page = 1, $pageSize = 20, $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/AccountingItem/List', $params);
     }
 
@@ -411,34 +393,23 @@ class Client extends BaseClient
      */
     public function getStockCount($page = 1, $pageSize = 20, $data = [], $accountDb = '')
     {
+        $params = [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+            'Data' => [
+                "GName" => "",
+                "GCode" => "",
+                "GHelpCode" => "",
+                "GBatchNo" => "",
+                "GStockCode" => "",
+                "SearchTop" => "",
+                "GModel" => ""
+            ],
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize,
-                'Data' => [
-                    "GName" => "",
-                    "GCode" => "",
-                    "GHelpCode" => "",
-                    "GBatchNo" => "",
-                    "GStockCode" => "",
-                    "SearchTop" => "",
-                    "GModel" => ""
-                ],
-            ];
-        } else {
-            $params = [
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize,
-                'Data' => [
-                    "GName" => "",
-                    "GCode" => "",
-                    "GHelpCode" => "",
-                    "GBatchNo" => "",
-                    "GStockCode" => "",
-                    "SearchTop" => "",
-                    "GModel" => ""
-                ],
             ];
         }
         return $this->httpPostJson('/koas/APP002112/uereport/UEStockController/SearchItemInfors', $params);
@@ -456,22 +427,19 @@ class Client extends BaseClient
      */
     public function getStoreHouseList($page = 1, $pageSize = 20, $data = [], $accountDb = '')
     {
+        $params = [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+            'Data' => [
+            ],
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize,
-                'Data' => [
-                ],
-            ];
-        } else {
-            $params = [
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize,
-                'Data' => [
-                ],
             ];
         }
+
 
         return $this->httpPostJson('koas/APP002112/uereport/UEStockController/GetStockInfors', $params);
     }
@@ -490,26 +458,21 @@ class Client extends BaseClient
      */
     public function GetItemStockInfo($page = 1, $pageSize = 2, $materialId = '', $stockId = '', $accountDb = '')
     {
+        $params = [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+            'Data' => [
+                'FItemID' => $materialId,
+                'FStockID' => $stockId,
+            ],
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize,
-                'Data' => [
-                    'FItemID' => $materialId,
-                    'FStockID' => $stockId,
-                ],
-            ];
-        } else {
-            $params = [
-                'CurrentPage' => $page,
-                'ItemsOfPage' => $pageSize,
-                'Data' => [
-                    'FItemID' => $materialId,
-                    'FStockID' => $stockId,
-                ],
             ];
         }
+
         return $this->httpPostJson('/koas/APP002112/uereport/UEStockController/GetItemStockInfors', $params);
     }
 
@@ -529,102 +492,83 @@ class Client extends BaseClient
      */
     public function getAccountList($page = 1, $pageSize = 20, $ids = [], $startDate = '', $endDate = '', $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/Account/List', $params);
     }
 
 
     public function getDepartmentList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'ParentId' => $parentId,
+            'Detail' => $detail,
+            'SearchKey' => $searchKey,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/Department/List', $params);
     }
 
 
     public function getEmployeeList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDb = '')
     {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'ParentId' => $parentId,
+            'Detail' => $detail,
+            'SearchKey' => $searchKey,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate,
+            "FItemClassID" => 2
+        ];
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate,
-                "FItemClassID" => 2
-            ];
-        } else {
-            $params = [
-                'ItemsOfPage' => $pageSize,
-                'CurrentPage' => $page,
-                'ParentId' => $parentId,
-                'Detail' => $detail,
-                'SearchKey' => $searchKey,
-                'Ids' => $ids,
-                'StartDate' => $startDate,
-                'EndDate' => $endDate,
-                "FItemClassID" => 2
             ];
         }
+
+
         return $this->httpPostJson('/koas/APP006992/api/Employee/List', $params);
     }
 
     public function getEmployeeDetail($itemId, $accountDb = '')
     {
+        $params = [
+            "ItemId" => $itemId
+
+        ];
+
         if ($accountDb != '') {
             $params = [
                 'AccountDB' => $accountDb,
-                "ItemId" => $itemId
-            ];
-        } else {
-            $params = [
-                "ItemId" => $itemId
-
             ];
         }
+
         return $this->httpPostJson('/koas/APP006992/api/Employee/Get', $params);
     }
 

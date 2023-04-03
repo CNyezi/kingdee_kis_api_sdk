@@ -58,7 +58,6 @@ abstract class Gateway implements GatewayInterface
     public function getGatewayInfo()
     {
         $cache = $this->getCache();
-        var_dump($cache);
         $cacheKey = $this->getCacheKey();
         if ($cache->has($cacheKey) && $result = $cache->get($cacheKey)) {
             return $result;
