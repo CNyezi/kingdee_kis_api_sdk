@@ -25,7 +25,8 @@ class Application extends ServiceContainer
         Login\ServiceProvider::class,
         Account\ServiceProvider::class,
         ServiceProvider::class,
-        Pay\ServiceProvider::class
+        Pay\ServiceProvider::class,
+        Sale\ServiceProvider::class
     ];
 
     public function checkKisAuthStatus()

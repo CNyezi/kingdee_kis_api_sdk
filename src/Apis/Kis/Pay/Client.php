@@ -20,16 +20,29 @@ class Client extends BaseClient
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
      */
-    public function getOtherApBillList($page, $pageSize, $orderField = 'FDate', $sort = 'desc')
+    public function getOtherApBillList($page, $pageSize, $orderField = 'FDate', $sort = 'desc',$accountDb='')
     {
-        return $this->httpPostJson('/koas/APP007020/api/OtherApBill/List', [
-            "CurrentPage" => $page,
-            "ItemsOfPage" => $pageSize,
-            "OrderBy" => [
-                "Property" => $orderField,
-                "Type" => $sort
-            ]
-        ]);
+        if ($accountDb !=''){
+            $params=[
+                "CurrentPage" => $page,
+                "ItemsOfPage" => $pageSize,
+                "OrderBy" => [
+                    "Property" => $orderField,
+                    "Type" => $sort
+                ],
+                "AccountDb" => $accountDb
+            ];
+        }else{
+            $params=[
+                "CurrentPage" => $page,
+                "ItemsOfPage" => $pageSize,
+                "OrderBy" => [
+                    "Property" => $orderField,
+                    "Type" => $sort
+                ]
+            ];
+        }
+        return $this->httpPostJson('/koas/APP007020/api/OtherApBill/List', $params);
     }
 
     /**
