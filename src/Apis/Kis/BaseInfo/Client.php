@@ -80,7 +80,7 @@ class Client extends BaseClient
      * @throws InvalidConfigException
      */
     public function getSupplierList($page = 1, $pageSize = 20, $parentId = 0,
-                                    $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDb = '02.02')
+                                    $detail = true, $searchKey = '', $ids = [], $startDate = '', $endDate = '', $accountDb = '')
     {
         $params = [
             'ItemsOfPage' => $pageSize,
@@ -315,6 +315,32 @@ class Client extends BaseClient
         return $this->httpPostJson('/koas/APP006992/api/MeasureUnit/UnitGroupList', $params);
 
     }
+
+    /**
+     * 获取所有仓库列表
+     * @param $page
+     * @param $pageSize
+     * @param $accountDb
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function storeHouseList($page = 1, $pageSize = 20, $accountDb = '')
+    {
+        $params = [
+            'ItemsOfPage' => $pageSize,
+            'CurrentPage' => $page,
+            'ParentId'=>0,
+            'Detail'=>true,
+        ];
+
+        if ($accountDb != '') {
+            $params['AccountDb']=$accountDb;
+        }
+
+        return $this->httpPostJson('/koas/APP006992/api/Stock/List', $params);
+    }
+
 
     /**
      * 获取物料单位详情
