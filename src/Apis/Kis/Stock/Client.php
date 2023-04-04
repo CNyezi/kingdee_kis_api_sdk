@@ -23,7 +23,7 @@ class Client extends BaseClient
             'CurrentPage' => $page,
             'ItemsOfPage' => $pageSize,
         ];
-        if ($params != ''){
+        if ($accountDb != ''){
             $params['AccountDb'] = $accountDb;
         }
 
@@ -45,7 +45,7 @@ class Client extends BaseClient
             'CurrentPage' => $page,
             'ItemsOfPage' => $pageSize,
         ];
-        if ($params != ''){
+        if ($accountDb != ''){
             $params['AccountDb'] = $accountDb;
         }
 
@@ -67,24 +67,55 @@ class Client extends BaseClient
             'CurrentPage' => $page,
             'ItemsOfPage' => $pageSize,
         ];
-        if ($params != ''){
+        if ($accountDb != ''){
             $params['AccountDb'] = $accountDb;
         }
 
         return $this->httpPostJson('/koas/app007104/api/miscellaneousreceipt/list', $params);
     }
 
+    /**
+     * 产品入库仓
+     * @param $page
+     * @param $pageSize
+     * @param $accountDb
+     * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
+     */
     public function productWarehouseList($page = 1, $pageSize = 20, $accountDb = '')
     {
         $params=[
             'CurrentPage' => $page,
             'ItemsOfPage' => $pageSize,
         ];
-        if ($params != ''){
+        if ($accountDb != ''){
             $params['AccountDb'] = $accountDb;
         }
 
         return $this->httpPostJson('/koas/app007104/api/productreceipt/list', $params);
+    }
+
+    /**
+     * 生产领料单列表
+     * @param $page
+     * @param $pageSize
+     * @param $accountDb
+     * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
+     */
+    public function producePickingList($page = 1 ,$pageSize =20,$accountDb= '')
+    {
+        $params=[
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+        ];
+        if ($accountDb != ''){
+            $params['AccountDb'] = $accountDb;
+        }
+
+        return $this->httpPostJson('/koas/app007104/api/pickinglist/list',$params);
     }
 
 }
