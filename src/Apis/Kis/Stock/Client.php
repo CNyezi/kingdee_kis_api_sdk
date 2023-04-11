@@ -27,7 +27,7 @@ class Client extends BaseClient
             $params['AccountDb'] = $accountDb;
         }
 
-        return $this->httpPostJson('/koas/app007099/api/salesorder/list', $params);
+        return $this->httpPostJson('/koas/app007104/api/salesdelivery/list', $params);
     }
 
     /**
@@ -72,6 +72,28 @@ class Client extends BaseClient
         }
 
         return $this->httpPostJson('/koas/app007104/api/miscellaneousreceipt/list', $params);
+    }
+
+    /**
+     * 其他出库单
+     * @param $page
+     * @param $pageSize
+     * @param $accountDb
+     * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
+     */
+    public function otherExWarehouseList($page = 1, $pageSize = 20, $accountDb = '')
+    {
+        $params=[
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+        ];
+        if ($accountDb != ''){
+            $params['AccountDb'] = $accountDb;
+        }
+
+        return $this->httpPostJson('/koas/app007104/api/miscellaneousdelivery/list', $params);
     }
 
     /**
