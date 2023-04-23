@@ -19,6 +19,7 @@ use Pimple\ServiceProviderInterface;
  * @property \Holt\KindeeKis\Apis\Kis\Sale\Client $sale
  * @property \Holt\KindeeKis\Apis\Kis\Stock\Client $stock
  * @property \Holt\KindeeKis\Apis\Kis\Purchase\Client $purchase
+ * @property \Holt\KindeeKis\Apis\Kis\Voucher\Client $voucher
  */
 class Application extends ServiceContainer
 {
@@ -32,6 +33,7 @@ class Application extends ServiceContainer
         Sale\ServiceProvider::class,
         Stock\ServiceProvider::class,
         Purchase\ServiceProvider::class,
+        Voucher\ServiceProvider::class,
     ];
 
     public function checkKisAuthStatus()

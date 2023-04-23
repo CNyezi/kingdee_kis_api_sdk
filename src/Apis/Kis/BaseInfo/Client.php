@@ -100,6 +100,41 @@ class Client extends BaseClient
         return $this->httpPostJson('/koas/APP006992/api/Vendor/List', $params);
     }
 
+    /**
+     * 获取客户列表
+     * @param $page
+     * @param $pageSize
+     * @param $parentId
+     * @param $detail
+     * @param $searchKey
+     * @param $ids
+     * @param $startDate
+     * @param $endDate
+     * @param $accountDb
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getCustomerList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = '', $startDate = '', $endDate = '', $accountDb = '')
+    {
+        $params=[
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+            'ParentId' => $parentId,
+            'Detail' => $detail,
+            'SearchKey' => $searchKey,
+            'Ids' => $ids,
+            'StartDate' => $startDate,
+            'EndDate' => $endDate
+        ];
+
+        if ($accountDb != ''){
+            $params['AccountDb'] = $accountDb;
+        }
+
+        return $this->httpPostJson('/koas/APP006992/api/Customer/List', $params);
+    }
+
 
     /**
      * 获取供应商资料详情
