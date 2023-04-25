@@ -73,7 +73,6 @@ class Client extends BaseClient
         }
 
 
-
         return $this->httpPostJson('/koas/APP007155/api/Voucher/Create', $params);
     }
 
@@ -100,6 +99,29 @@ class Client extends BaseClient
     }
 
     /**
+     * 获取会计科目详情
+     * @param $page
+     * @param $pageSize
+     * @param $ids
+     * @param $accountDb
+     * @return array|\Holt\KindeeKis\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
+     */
+    public function getAccountDetail($page = 1, $pageSize = 20, $ids = [], $accountDb = '')
+    {
+        $params = [
+            'CurrentPage' => $page,
+            'ItemsOfPage' => $pageSize,
+            'Ids' => $ids,
+        ];
+        if ($accountDb != '') {
+            $params['AccountDb'] = $accountDb;
+        }
+        return $this->httpPostJson('/koas/APP006992/api/Account/List', $params);
+    }
+
+    /**
      * 获取凭证详情
      * @param $id
      * @param $accountDb
@@ -107,7 +129,7 @@ class Client extends BaseClient
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
      */
-    public function getVoucherDetail($id,$accountDb = '')
+    public function getVoucherDetail($id, $accountDb = '')
     {
         $params = [
             'FVoucherID' => $id,
@@ -136,10 +158,10 @@ class Client extends BaseClient
             'ItemsOfPage' => $pageSize,
             'Ids' => $ids
         ];
-        if ($accountDb != ''){
+        if ($accountDb != '') {
             $params['AccountDb'] = $accountDb;
         }
 
-        return $this->httpPostJson('/koas/APP006992/api/Currency/List',$params);
+        return $this->httpPostJson('/koas/APP006992/api/Currency/List', $params);
     }
 }

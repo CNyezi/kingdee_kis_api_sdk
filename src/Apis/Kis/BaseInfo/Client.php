@@ -117,7 +117,7 @@ class Client extends BaseClient
      */
     public function getCustomerList($page = 1, $pageSize = 20, $parentId = 0, $detail = true, $searchKey = '', $ids = '', $startDate = '', $endDate = '', $accountDb = '')
     {
-        $params=[
+        $params = [
             'CurrentPage' => $page,
             'ItemsOfPage' => $pageSize,
             'ParentId' => $parentId,
@@ -128,7 +128,7 @@ class Client extends BaseClient
             'EndDate' => $endDate
         ];
 
-        if ($accountDb != ''){
+        if ($accountDb != '') {
             $params['AccountDb'] = $accountDb;
         }
 
@@ -648,6 +648,27 @@ class Client extends BaseClient
         }
 
         return $this->httpPostJson('/koas/APP006992/api/Customer/Get', $params);
+    }
+
+    /**
+     * 获取核算项目详情
+     * @param $id
+     * @param $accountDb
+     * @return array|Collection|object|ResponseInterface|string
+     * @throws GuzzleException
+     * @throws InvalidConfigException
+     */
+    public function getAccountingItemDetail($id, $accountDb = '')
+    {
+        $params = [
+            "ItemId" => $id
+        ];
+
+        if ($accountDb != '') {
+            $params['AccountDb'] = $accountDb;
+        }
+
+        return $this->httpPostJson('/koas/APP006992/api/AccountingItem/GetDetail', $params);
     }
 
 }
