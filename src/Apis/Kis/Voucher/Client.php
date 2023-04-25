@@ -108,17 +108,16 @@ class Client extends BaseClient
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Holt\KindeeKis\Kernel\Exceptions\InvalidConfigException
      */
-    public function getAccountDetail($page = 1, $pageSize = 20, $ids = [], $accountDb = '')
+    public function getAccountDetail($accountId , $accountDb = '')
     {
         $params = [
-            'CurrentPage' => $page,
-            'ItemsOfPage' => $pageSize,
-            'Ids' => $ids,
+            'FAccountId' => $accountId,
+            'ShowItems' => true,
         ];
         if ($accountDb != '') {
             $params['AccountDb'] = $accountDb;
         }
-        return $this->httpPostJson('/koas/APP006992/api/Account/List', $params);
+        return $this->httpPostJson('/koas/APP006992/api/Account/GetDetail', $params);
     }
 
     /**
