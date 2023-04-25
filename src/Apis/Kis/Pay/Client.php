@@ -32,7 +32,7 @@ class Client extends BaseClient
         ];
 
         if ($accountDb != '') {
-            $params['AccountDb']=$accountDb;
+            $params['AccountDb'] = $accountDb;
         }
 
         return $this->httpPostJson('/koas/APP007020/api/OtherApBill/List', $params);
@@ -43,7 +43,7 @@ class Client extends BaseClient
      * doc link
      * https://open.jdy.com/#/files/api/detail?index=2&categrayId=dded94c553614747b2c9b8b49c396aa6&id=42a99333755611ed86f705c49066d110
      */
-    public function createOtherAp($head, $entryList, $entry2List)
+    public function createOtherAp($head, $entryList, $entry2List, $accountDb = '')
     {
         $params = [
             "Object" => [
@@ -52,6 +52,9 @@ class Client extends BaseClient
                 "Entry2" => $entry2List
             ]
         ];
+        if ($accountDb != '') {
+            $params['accountDb'] = $accountDb;
+        }
         return $this->httpPostJson('/koas/APP007020/api/OtherApBill/Create', $params);
     }
     // 参考请求体
