@@ -151,7 +151,7 @@ class Client extends BaseClient
         if ($accountDb != '') {
             $params['AccountDb'] = $accountDb;
         }
-        return $this->httpPostJson('/koas/APP006992/api/Customer/Get', $params);
+        return $this->httpPostJson('/koas/APP006992/api/Customer/GetDetail', $params);
     }
 
 
@@ -170,7 +170,7 @@ class Client extends BaseClient
         if ($accountDb != '') {
             $params['AccountDb'] = $accountDb;
         }
-        return $this->httpPostJson('/koas/APP006992/api/Vendor/Get', $params);
+        return $this->httpPostJson('/koas/APP006992/api/Vendor/GetDetail', $params);
     }
 
     /**
